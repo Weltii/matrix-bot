@@ -1,4 +1,5 @@
 from app.nio_client import BotClient
+from config import matrix as conf
 from nio import (AsyncClient, SyncResponse, RoomMessageText, LoginResponse)
 import asyncio
 from importlib import util
@@ -7,9 +8,9 @@ sys.path.append("./")
 
 
 bot: BotClient = BotClient(
-    "https://matrix.org",
-    "weltiimore",
-    "JmvAkL4fEDN4NhXUNAWY8Scwvt37by6Gw9zPu6d4rDEV9ASxCe85sLkG6pCXCSgj"
+    conf.get("homeserver"),
+    conf.get("user_name"),
+    conf.get("user_password")
 )
 
 loop = asyncio.get_event_loop()
