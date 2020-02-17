@@ -1,4 +1,5 @@
 from .utils import (get_last_batch, save_batch)
+from .mod_processor import (process_command)
 from nio import (AsyncClient, SyncResponse, RoomMessageText, LoginResponse)
 import asyncio
 from importlib import util
@@ -21,6 +22,8 @@ class BotClient(AsyncClient):
                 func = self.command_mapping.get(command)
                 if func:
                     output = func()
+            else:
+                output = process_command(input)
         return output
 
     async def run_sync_loop(self):
